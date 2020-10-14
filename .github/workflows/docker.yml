@@ -1,0 +1,41 @@
+name: Publish Docker image
+
+#on:
+#  release:
+#    types: [published]
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    name: Push to Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Source Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Repo
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.DOCKER_REPO_USERNAME }}
+          password: ${{ secrets.DOCKER_REPO_PASSWORD }}
+
+      - name: Push to Docker Repo
+        uses: docker/build-push-action@v2
+        with:
+#          context: .
+          file: ./github.dockerfile
+          push: true
+          tags: ghcr.io/deuxksy/registry-java-gradle:latest
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}

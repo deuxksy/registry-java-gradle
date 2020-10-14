@@ -1,0 +1,25 @@
+plugins {
+  id 'java'
+  id 'application'
+}
+
+group = 'com.zzizily.registry'
+version = '0.0.1'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+wrapper {
+  gradleVersion = gradleVersion
+  distributionType = Wrapper.DistributionType.BIN
+}
+
+
+dependencies {
+
+}
