@@ -20,6 +20,6 @@ wrapper {
 }
 
 
-dependencies {
-
+application {
+  mainClassName('com.zzizily.registry.App')
 }
