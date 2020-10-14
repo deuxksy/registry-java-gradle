@@ -4,6 +4,7 @@ WORKDIR /app
 COPY . /app/temp
 RUN chmod +x ./temp/gradlew
 RUN cd ./temp && ./gradlew installDist
-RUN cp ./temp/build/install/registry-java-gradle/ .
+RUN cp ./temp/build/install/registry-java-gradle .
 RUN rm -rf ./temp
 ENTRYPOINT ["./bin/registry-java-gradle"]
+
